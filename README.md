@@ -15,4 +15,62 @@ A brief tutorial on using kubectl tool to run applications on kubernetes cluster
   
 ## Using kubectl:
 
-1. 
+You can use kubectl from a terminal (or cmd on Windows).
+
+- To and check the pods (container or group of containers) currently running:
+
+   ```kubectl get pods -n <namespace>```
+
+- To create a pod:
+
+   ```kubectl create -f /path/to/*.yaml -n <namespace>```
+   
+   Or, you can also get the .yaml parameter file using a web address.
+   
+   ```kubectl create -f https://raw.githubusercontent.com/dimm0/prp_k8s_config/master/tensorflow-example.yaml -n <namespace>```
+   
+   If you run ```kubectl get pods -n <namespace>``` again, you should see the STATUS changing from 'ContainerCreating' to 'Running'.
+
+- To delete a pod:
+   ```kubectl delete -f https://raw.githubusercontent.com/dimm0/prp_k8s_config/master/tensorflow-example.yaml -n <namespace>```
+  
+  Or specify the appropriate path to the .yaml file. 
+  ## Alway delete your pod after use.
+
+- To open the pod terminal:
+
+   ```kubectl exec -it <pod-name> -n <namespace> bash```
+   
+   The ```<pod-name> ``` is the 'name' parameter of .yaml file.
+   
+- If you used the .yaml file above, it comes with a docker with TensorFlow and all dependencies
+  installed. It also has jupyterlab pre-installed, so you can tunnel jupyter notebooks 
+  remotely. The pod (let's use this term hereafter, instead of docker container) also has 
+  three ipythin notebooks.
+
+  ### Let's try the mnist example:
+  
+  - Check if jupyterlab is installed. If not, install it.
+    
+    ```pip install jupyterlab```
+  
+  - Then enter the following command to start a remote tunnel.
+  
+      ``` jupyter lab --allow-root --port=<any port number under 64K and more than 2K> --ip=127.0.0.1```
+      It will create a URL to access the jupyter instance. Copy it.
+      
+  - On a new terminal window, enter this:
+  
+      ```kubectl port-forward gpu-pod-example <same-port-number> -n <namespace>```
+      
+      It will start the port forwarding.
+      
+  - Open a browser and paste the URL copied from before and enter. Now you have access to
+    all the jupyter notecbooks on the pod.
+    
+  - Try the stepwise MNIST example.
+      
+
+
+
+
