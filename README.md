@@ -8,7 +8,7 @@ A brief tutorial on using kubectl tool to run applications on kubernetes cluster
    - Click on login (upper right corner)
    - Choose UCI (or your institution) from the list and use your credentials. Now you should have user access.
    - Click the "Get Config" link on top right and get your config file.
-   - Put the file to your $home/.kube directory.
+   - Put the file in your $home/.kube directory.
    - (option 1) Register at https://rocket.nautilus.optiputer.net/ chat app and request the owners there to give you admin access to create a namespace. Recommended as the owners are active on the chat and help you fast, even if you don't need admin access.
    - (option 2) If someone from your lab already has admin access (like me), ask to add as a user to his/her namespaces(s).
 3. If you use a different kubernetes cluster, contact its admin on creating namespaces and gaining access.
@@ -35,7 +35,7 @@ You can use kubectl from a terminal (or cmd on Windows).
    ```kubectl delete -f https://raw.githubusercontent.com/dimm0/prp_k8s_config/master/tensorflow-example.yaml -n <namespace>```
   
   Or specify the appropriate path to the .yaml file. 
-  ## Alway delete your pod after use.
+  ## Remember: Always delete your pod after use.
 
 - To open the pod terminal:
 
@@ -43,34 +43,32 @@ You can use kubectl from a terminal (or cmd on Windows).
    
    The ```<pod-name> ``` is the 'name' parameter of .yaml file.
    
-- If you used the .yaml file above, it comes with a docker with TensorFlow and all dependencies
-  installed. It also has jupyterlab pre-installed, so you can tunnel jupyter notebooks 
-  remotely. The pod (let's use this term hereafter, instead of docker container) also has 
-  three ipythin notebooks.
+- If you used the .yaml file above, it uses a docker with TensorFlow + dependencies
+  installed. The pod (let's use this term hereafter, instead of docker container) also has 
+  three example ipython notebooks.
 
   ### Let's try the mnist example:
   
-  - Check if jupyterlab is installed. If not, install it.
+  - Check if jupyterlab is installed. With jupyterlab, you can tunnel jupyter notebooks 
+  remotely.If not, install it.
     
     ```pip install jupyterlab```
   
   - Then enter the following command to start a remote tunnel.
   
-      ``` jupyter lab --allow-root --port=<any port number under 64K and more than 2K> --ip=127.0.0.1```
+      ```jupyter lab --allow-root --port=<any port number under 64K and more than 2K> --ip=127.0.0.1```
       It will create a URL to access the jupyter instance. Copy it.
       
-  - On a new terminal window, enter this:
+  - On a new terminal and execute this:
   
-      ```kubectl port-forward gpu-pod-example <same-port-number> -n <namespace>```
+      ```kubectl port-forward <pod-name> <same-port-number> -n <namespace>```
       
       It will start the port forwarding.
       
   - Open a browser and paste the URL copied from before and enter. Now you have access to
-    all the jupyter notecbooks on the pod.
+    all the jupyter notebooks on the pod.
     
-  - Try the stepwise MNIST example.
-      
-
-
-
-
+  - Try the stepwise MNIST example from scratch. There are two additional getting started 
+    tutorials as well.
+    
+  - Create your own jupyter notebook.
