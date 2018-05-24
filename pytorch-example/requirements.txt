@@ -1,0 +1,8 @@
+scipy
+argparse
+tensorboard-pytorch
+tensorboardX
+blessings
+progressbar2
+tqdm
+path.py
