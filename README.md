@@ -10,7 +10,7 @@ A brief tutorial on using kubectl tool to run applications on kubernetes cluster
    - Click the "Get Config" link on top right and get your config file.
    - Put the file in your $home/.kube directory.
    - (option 1) Register at https://rocket.nautilus.optiputer.net/ chat app and request the owners there to give you admin access to create a namespace. Recommended as the owners are active on the chat and help you fast, even if you don't need admin access.
-   - (option 2) If someone from your lab already has admin access (like me), ask to add as a user to his/her namespaces(s).
+   - (option 2) If someone from your lab already has admin access, ask to add as a user to his/her namespaces(s).
 3. If you use a different kubernetes cluster, contact its admin on creating namespaces and gaining access.
   
 ## Using kubectl:
