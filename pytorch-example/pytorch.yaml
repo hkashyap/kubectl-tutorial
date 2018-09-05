@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: gpu-container
-    image: uetchy/machinelearning
+    image: hkashyap/evolve_rl
     imagePullPolicy: Always
     args: ["sleep", "36500000"]
     resources:
