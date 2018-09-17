@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pytorch-example-gpu
+  name: gpu-1-hk
 spec:
   containers:
   - name: gpu-container
@@ -10,7 +10,7 @@ spec:
     args: ["sleep", "36500000"]
     resources:
       limits:
-        nvidia.com/gpu: 1
+        nvidia.com/gpu: 2
     volumeMounts:
       - mountPath: /dev/shm
         name: dshm
