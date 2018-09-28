@@ -5,12 +5,16 @@ metadata:
 spec:
   containers:
   - name: gpu-container
-    image: pytorch/pytorch
+    image: hkashyap/evolverl
     imagePullPolicy: Always
     args: ["sleep", "36500000"]
     resources:
       limits:
         nvidia.com/gpu: 1
+        memory: 16Gi
+      requests:
+        nvidia.com/gpu: 1
+        memory: 16Gi
     volumeMounts:
       - mountPath: /pervol-ii
         name: pervol-ii
