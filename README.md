@@ -53,7 +53,8 @@ You can use kubectl from a terminal (or cmd on Windows).
     You can also refer to [*gpu-1-pt-rook-pod.yaml*](https://github.com/KarlXing/kubectl-tutorial/blob/master/pytorch-example/gpu-1-ev-rook.yaml) in this repository to create a persistent volume, create a pod and mount the pod to the persistent volume.
     
   * copy data from pod to local machine
-    `kubectl cp <namespace>/<pod-name>:/pod/path/to/data   /local/path/to/save`
+  
+    ```kubectl cp <namespace>/<pod-name>:/pod/path/to/data   /local/path/to/save```
    
 - If you used the .yaml file above, it uses a docker with TensorFlow + dependencies
   installed. The pod (let's use this term hereafter, instead of docker container) also has 
