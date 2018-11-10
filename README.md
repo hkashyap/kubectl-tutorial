@@ -43,6 +43,19 @@ You can use kubectl from a terminal (or cmd on Windows).
    
    The ```<pod-name> ``` is the 'name' parameter of .yaml file.
    
+- To save data in the pod
+
+  You can either create a persistent volume and mount the pod to it or use **kubectl cp** command to copy the data from pod to your local machine.
+  
+  * persistent volume
+    
+      You can refer to [*gpu-1-pt-rook-vol.yaml*](https://github.com/KarlXing/kubectl-tutorial/blob/master/pytorch-example/gpu-1-pt-rook-pod.yaml) in this repository to create a persistent volume.
+    You can also refer to [*gpu-1-pt-rook-pod.yaml*](https://github.com/KarlXing/kubectl-tutorial/blob/master/pytorch-example/gpu-1-ev-rook.yaml) in this repository to create a persistent volume, create a pod and mount the pod to the persistent volume.
+    
+  * copy data from pod to local machine
+  
+    ```kubectl cp <namespace>/<pod-name>:/pod/path/to/data   /local/path/to/save```
+   
 - If you used the .yaml file above, it uses a docker with TensorFlow + dependencies
   installed. The pod (let's use this term hereafter, instead of docker container) also has 
   three example ipython notebooks.
@@ -64,6 +77,11 @@ You can use kubectl from a terminal (or cmd on Windows).
       ```kubectl port-forward <pod-name> <same-port-number> -n <namespace>```
       
       It will start the port forwarding.
+    
+      If you want to forward to different ports, you can run this:
+      
+      ```kubectl port-forward <pod-name> <local-port>:<pod-port> -n <namespace>```
+      
       
   - Open a browser and paste the URL copied from before and enter. Now you have access to
     all the jupyter notebooks on the pod.
@@ -72,3 +90,5 @@ You can use kubectl from a terminal (or cmd on Windows).
     tutorials as well.
     
   - Create your own jupyter notebook.
+
+
