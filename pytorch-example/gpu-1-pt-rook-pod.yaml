@@ -18,8 +18,13 @@ spec:
     volumeMounts:
       - mountPath: /pervol
         name: pervol
+      - mountPath: /dev/shm
+        name: mem
   restartPolicy: Never
   volumes:
     - name: pervol
       persistentVolumeClaim:
         claimName: pervol
+    - name: mem
+      emptyDir:
+        medium: Memory

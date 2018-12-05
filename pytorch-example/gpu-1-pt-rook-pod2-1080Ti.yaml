@@ -10,16 +10,25 @@ spec:
     args: ["sleep", "36500000"]
     resources:
       limits:
-        nvidia.com/gpu: 4
+        nvidia.com/gpu: 2
         memory: 16Gi
       requests:
-        nvidia.com/gpu: 4
+        nvidia.com/gpu: 2
         memory: 16Gi
     volumeMounts:
       - mountPath: /pervol-ii
         name: pervol-ii
       - mountPath: /dev/shm
         name: mem
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: gpu-type
+            operator: In
+            values:
+            - 1080Ti
   restartPolicy: Never
   volumes:
     - name: pervol-ii

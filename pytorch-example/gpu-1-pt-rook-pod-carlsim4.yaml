@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: gpu-one-rook-hk-ii
+  name: gpu-one-rook-carlsim4
 spec:
   containers:
   - name: gpu-container
@@ -16,15 +16,10 @@ spec:
         nvidia.com/gpu: 4
         memory: 16Gi
     volumeMounts:
-      - mountPath: /pervol-ii
-        name: pervol-ii
       - mountPath: /dev/shm
         name: mem
   restartPolicy: Never
   volumes:
-    - name: pervol-ii
-      persistentVolumeClaim:
-        claimName: pervol-ii
     - name: mem
       emptyDir:
         medium: Memory
