@@ -56,7 +56,7 @@ In this command, there's a bucket called 'jinwei-bucket' and the command will co
 #### Config example
 One example of the config file for a job is like below 
 
-![Screen Shot 2019-05-02 at 10.52.44 P](media/15568620284316/Screen%20Shot%202019-05-02%20at%2010.52.44%20PM.png)
+![config example](imgs/jobconfig.png)
 
 #### One persistent volume for one pod
 One persistent volume could only be mounted to one pod. It means you cannot mount the same persistent volume to multiple pods. When your job is done, your pod will be still be there and the persistent volume is also mounted. So you need to delete the job or the pod first, release the use of the persistent volume and then create another interactive pod mounted by this volume for further data transfer. If you hope this volume could be shared, you can look at [http://ucsd-prp.gitlab.io/userdocs/storage/ceph/#ceph_shared](http://ucsd-prp.gitlab.io/userdocs/storage/ceph/#ceph_shared). 
