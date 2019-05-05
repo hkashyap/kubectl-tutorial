@@ -15,11 +15,11 @@ spec:
           limits:
             nvidia.com/gpu: 1
             memory: 16Gi
-            cpu: "8"
+            cpu: 8
           requests:
             nvidia.com/gpu: 1
             memory: 16Gi
-            cpu: "8"
+            cpu: 8
         volumeMounts:
           - mountPath: /pervol
             name: pervol
@@ -44,8 +44,6 @@ spec:
           volumeMounts:
             - name: pervol
               mountPath: /pervol
-            - mountPath: /dev/shm
-              name: mem
       volumes:
         - name: pervol
           persistentVolumeClaim:
