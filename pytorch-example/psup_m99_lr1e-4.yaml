@@ -1,0 +1,57 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: psup-m99-lr1e-4
+spec:
+  template:
+    spec:
+      containers:
+      - name: gpu-container
+        image: hkashyap/evolverl
+        imagePullPolicy: Always
+        command: ["/bin/sh", "-c"]
+        args: ["cd /pervol/ofd; pip install -r requirements.txt; python3.6 train_vkitti_2dobj.py --data_dir=/pervol/virtual_kitti/ --lr=1e-4 -b=1 --epoch=500 --lambda_m=1e-6 --lambda_d=1e-6 --scale_epoch=25 --pose_sup --log_im_freq=0 --bjob -m=0.99;"]
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+            memory: 16Gi
+            cpu: "8"
+          requests:
+            nvidia.com/gpu: 1
+            memory: 16Gi
+            cpu: "8"
+        volumeMounts:
+          - mountPath: /pervol
+            name: pervol
+          - mountPath: /dev/shm
+            name: mem
+      initContainers:
+        - name: init-repo
+          image: hkashyap/evolverl
+          env:
+          - name: GIT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: gitlab-secret
+                key: user    
+          - name: GIT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: gitlab-secret
+                key: password    
+          command: ["/bin/sh", "-c"]
+          args: ["rm -rf /pervol/ofd; git clone https://$(GIT_USERNAME):$(GIT_PASSWORD)@gitlab.com/hjkashyap/ofd.git /pervol/ofd;"]
+          volumeMounts:
+            - name: pervol
+              mountPath: /pervol
+            - mountPath: /dev/shm
+              name: mem
+      volumes:
+        - name: pervol
+          persistentVolumeClaim:
+            claimName: pervol
+        - name: mem
+          emptyDir:
+            medium: Memory
+      restartPolicy: Never
+  backoffLimit: 5

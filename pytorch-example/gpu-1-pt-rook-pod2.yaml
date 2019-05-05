@@ -10,10 +10,10 @@ spec:
     args: ["sleep", "36500000"]
     resources:
       limits:
-        nvidia.com/gpu: 4
-        memory: 16Gi
+        nvidia.com/gpu: 1
+        memory: 32Gi
       requests:
-        nvidia.com/gpu: 4
+        nvidia.com/gpu: 1
         memory: 16Gi
     volumeMounts:
       - mountPath: /pervol-ii

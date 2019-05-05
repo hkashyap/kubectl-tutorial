@@ -11,10 +11,10 @@ spec:
     resources:
       limits:
         nvidia.com/gpu: 1
-        memory: 16Gi
+        memory: 8Gi
       requests:
         nvidia.com/gpu: 1
-        memory: 16Gi
+        memory: 8Gi
     volumeMounts:
       - mountPath: /pervol
         name: pervol
